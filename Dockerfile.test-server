@@ -1,0 +1,6 @@
+FROM node:20
+WORKDIR /app
+COPY package.json .
+COPY src/test-server.js ./src/test-server.js
+CMD ["npm", "start"]
+EXPOSE 3000

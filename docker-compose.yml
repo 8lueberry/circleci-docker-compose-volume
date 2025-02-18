@@ -1,0 +1,25 @@
+services:
+  test-server:
+    ports:
+      - "3000:3000"
+    image: 8lueberry/circleci-test-server
+    volumes:
+      - app_data:/app/data  # shared volume
+    networks:
+      - shared_network
+
+  test-proxy:
+    image: 8lueberry/circleci-test-proxy
+    volumes:
+      - app_data:/app/data  # shared volume
+    networks:
+      - shared_network
+
+# CircleCi don't support bind volume so we are using a named volume that is shared between services
+volumes:
+  app_data: 
+    driver: local
+
+networks:
+  shared_network:
+    driver: bridge
